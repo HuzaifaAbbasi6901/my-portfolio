@@ -1,0 +1,96 @@
+---
+title: "Building a 3D Portfolio with React Three Fiber"
+description: "How I built an interactive WebGL hero with React Three Fiber and drei — without tanking Lighthouse: lazy loading, frameloop pausing, dpr caps and graceful fallbacks."
+date: "2025-09-14"
+tags: ["Next.js", "Three.js", "Performance"]
+---
+
+If you've ever added a Three.js scene to a website and watched your Lighthouse score fall off a cliff, this post is for you. WebGL is heavy — but with a few disciplined decisions, you can ship an interactive 3D hero that stays fast, accessible and battery-friendly.
+
+Here's the exact playbook I used for the hero on this site.
+
+## 1. Never ship the scene in your main bundle
+
+The single most impactful decision: load the canvas through `next/dynamic` with SSR disabled. React Three Fiber needs `window`, and the chunk is large, so it should never block first paint.
+
+```tsx
+import dynamic from "next/dynamic";
+
+const HeroScene = dynamic(() => import("@/components/three/HeroScene"), {
+  ssr: false,
+});
+```
+
+Because `ssr: false` isn't allowed in Server Components, this lives in a small `"use client"` wrapper that owns the capability checks.
+
+## 2. Detect capability before mounting
+
+There are two situations where the 3D scene shouldn't load at all: no WebGL support and `prefers-reduced-motion`. Both are cheap to check:
+
+```tsx
+function hasWebGL(): boolean {
+  try {
+    const canvas = document.createElement("canvas");
+    return Boolean(canvas.getContext("webgl2") ?? canvas.getContext("webgl"));
+  } catch {
+    return false;
+  }
+}
+```
+
+For reduced motion (or a failed WebGL check), I render a pure-CSS gradient orb. It costs ~0 KB of JavaScript and keeps the page visually complete. Accessibility isn't just about screen readers — vestibular disorders make floating 3D objects genuinely uncomfortable for some visitors.
+
+## 3. Pause the render loop off-screen
+
+A `requestAnimationFrame` loop running at 60fps for a scene nobody can see is pure waste. An `IntersectionObserver` toggles the frameloop:
+
+```tsx
+<Canvas frameloop={active ? "always" : "never"} ... />
+```
+
+When the hero scrolls out of view, GPU work drops to zero. This one line is the difference between a warm laptop and a hot one.
+
+## 4. Cap device pixel ratio and adapt
+
+Modern phones have 3x displays. Rendering 3x pixels is a tax nobody asked for:
+
+```tsx
+const [dpr, setDpr] = useState(1.5);
+
+<Canvas dpr={dpr}>
+  <PerformanceMonitor
+    onDecline={() => setDpr(1)}
+    onIncline={() => setDpr(1.75)}
+  />
+```
+
+drei's `PerformanceMonitor` samples FPS and nudges the DPR down when the device struggles, back up when it recovers. Adaptive quality beats static quality.
+
+## 5. Connect scroll and cursor with damping, not springs-on-every-frame
+
+The centerpiece follows the cursor and rotates as you scroll. The trick to making motion feel *expensive* (in a good way) is easing:
+
+```tsx
+useFrame((state, delta) => {
+  group.rotation.y += delta * 0.12;
+  const progress = scrollProgress.get();
+  group.position.y = progress * 1.6;
+  group.rotation.x += (targetTilt - group.rotation.x) * 0.045;
+});
+```
+
+That `0.045` lerp factor is the "weight" — small enough to feel like inertia, large enough to stay responsive.
+
+## 6. Avoid runtime asset fetches
+
+Many drei helpers fetch environment maps from a CDN at runtime. That's a network dependency you don't control and an extra request on first paint. Everything in this hero — lights, materials, particles — is generated in code. Distorted materials plus two colored point lights give you 90% of the "premium reflections" look for 0% of the network cost.
+
+## The result
+
+<Callout>
+
+The full hero adds roughly 300 KB gzipped to a **deferred** chunk — the main bundle stays untouched, LCP is a static headline, and the scene only spends GPU cycles while it's visible.
+
+</Callout>
+
+Performance and playfulness aren't enemies. They just need an architectural truce.

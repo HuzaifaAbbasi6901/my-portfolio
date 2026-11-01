@@ -1,0 +1,82 @@
+---
+title: "Design Tokens: The Foundation of a Maintainable Design System"
+description: "Why every color, spacing and shadow in a serious codebase should be a named decision, not a magic value — and how to structure tokens that survive theme changes."
+date: "2025-06-02"
+tags: ["Design Systems", "CSS"]
+---
+
+Every codebase has a moment where someone asks: "is this the right shade of purple?" If the answer involves opening DevTools and copying a hex from a screenshot, you don't have a design system — you have archaeology.
+
+Design tokens fix this. A token is a named decision: not `#8B6DFF`, but `--color-accent`. The name survives; the value changes.
+
+## Three layers of tokens
+
+The mistake most teams make is stopping at one layer. Tokens work best as a pyramid:
+
+1. **Primitive tokens** — raw values with no opinion. `violet-500: #8B6DFF`, `space-4: 16px`. Never referenced directly by components.
+2. **Semantic tokens** — intent made explicit. `--color-background`, `--color-muted`, `--color-accent`. This is what components consume.
+3. **Component tokens** — narrow overrides. `--button-padding-x: 1.75rem`. Optional, used sparingly.
+
+The semantic layer is what makes theming trivial. On this site, dark and light mode are just two definitions of the same semantic tokens:
+
+```css
+:root {
+  --rgb-background: 7 8 15;      /* near-black navy */
+  --rgb-foreground: 242 244 250; /* soft off-white */
+  --rgb-accent: 139 109 255;     /* violet */
+  --rgb-cyan: 34 211 238;
+}
+
+.light {
+  --rgb-background: 245 246 251;
+  --rgb-foreground: 14 18 32;
+  --rgb-accent: 109 74 255;      /* deepened for AA contrast */
+  --rgb-cyan: 8 145 178;
+}
+```
+
+Note the accent changes *value* between themes. That's the point: `--color-accent` isn't "purple", it's "the primary interactive color" — and the correct purple for a light background is a different purple.
+
+## Storing RGB triplets is a superpower
+
+You'll notice the values are `r g b` triplets, not hex. That's so Tailwind can compose opacity into them:
+
+```ts
+colors: {
+  background: "rgb(var(--rgb-background) / <alpha-value>)",
+}
+```
+
+Now `bg-card/40`, `border-border/10` and `bg-accent/15` all work with zero extra CSS. Glassmorphism lives and dies on translucent surfaces — this pattern is what makes it cheap.
+
+## Contrast is a token constraint, not a review comment
+
+WCAG AA isn't a polish step you do at the end; it's a constraint on your token values. A few rules of thumb I use:
+
+- Muted text on dark backgrounds: aim for ~7:1, not the 4.5:1 minimum. `#A7ADC2` on `#07080F` lands around 7.6:1 — comfortable, not just legal.
+- Accents used for text on light backgrounds need darkening. `#8B6DFF` on white fails for body text; `#6D4AFF` passes for large text.
+- Gold is a *decoration* color in dark mode but must earn its contrast in light mode — hence two different golds.
+
+## Spacing and radius deserve the same discipline
+
+Colors get all the attention, but layout tokens prevent 90% of visual drift:
+
+```css
+--space-1: 8px;   /* the 8-pt system: every margin and gap
+                     is a multiple, no exceptions */
+--radius-card: 24px;
+--radius-button: 9999px;
+--shadow-soft: 0 8px 30px rgb(0 0 0 / 0.06);
+```
+
+The rule I follow: **if a value appears twice, it's a token.** The third appearance is a bug.
+
+<Callout type="warn">
+
+The most common token failure mode is a "tokens.css" file that components ignore. Enforcement matters more than definition — wire primitives into your Tailwind config and let the linter block raw hex values.
+
+</Callout>
+
+## The payoff
+
+When tokens are done right, rebranding is an afternoon, dark mode is free, and new components inherit coherence without anyone remembering what the "right" purple was. That's the whole game: make the correct decision the path of least resistance.

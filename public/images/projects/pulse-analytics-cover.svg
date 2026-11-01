@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="750" viewBox="0 0 1200 750">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="750" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0B0D17"/>
+      <stop offset="100%" stop-color="#111424"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.75" cy="0.2" r="0.9">
+      <stop offset="0%" stop-color="rgba(232, 200, 152, 0.32)"/>
+      <stop offset="60%" stop-color="rgba(232, 200, 152, 0)"/>
+    </radialGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1200" y2="750" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#E8C898"/>
+      <stop offset="100%" stop-color="#b8e898"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="750" fill="url(#bg)"/>
+  <rect width="1200" height="750" fill="url(#glow)"/>
+  
+  <circle cx="40" cy="432" r="1.6" fill="rgba(232, 200, 152, 0.35)"/><circle cx="96" cy="432" r="1.8" fill="rgba(232, 200, 152, 0.35)"/><circle cx="96" cy="544" r="2.0" fill="rgba(232, 200, 152, 0.35)"/><circle cx="96" cy="656" r="2.8" fill="rgba(232, 200, 152, 0.35)"/><circle cx="152" cy="208" r="2.4" fill="rgba(232, 200, 152, 0.35)"/><circle cx="208" cy="40" r="2.6" fill="rgba(232, 200, 152, 0.35)"/><circle cx="208" cy="152" r="1.7" fill="rgba(232, 200, 152, 0.35)"/><circle cx="208" cy="320" r="3.0" fill="rgba(232, 200, 152, 0.35)"/><circle cx="208" cy="600" r="2.0" fill="rgba(232, 200, 152, 0.35)"/><circle cx="208" cy="712" r="2.9" fill="rgba(232, 200, 152, 0.35)"/><circle cx="264" cy="96" r="2.9" fill="rgba(232, 200, 152, 0.35)"/><circle cx="264" cy="376" r="3.2" fill="rgba(232, 200, 152, 0.35)"/><circle cx="264" cy="544" r="2.1" fill="rgba(232, 200, 152, 0.35)"/><circle cx="320" cy="320" r="3.1" fill="rgba(232, 200, 152, 0.35)"/><circle cx="320" cy="712" r="1.8" fill="rgba(232, 200, 152, 0.35)"/><circle cx="376" cy="208" r="2.7" fill="rgba(232, 200, 152, 0.35)"/><circle cx="376" cy="432" r="2.7" fill="rgba(232, 200, 152, 0.35)"/><circle cx="376" cy="656" r="2.6" fill="rgba(232, 200, 152, 0.35)"/><circle cx="432" cy="544" r="1.7" fill="rgba(232, 200, 152, 0.35)"/><circle cx="488" cy="40" r="2.2" fill="rgba(232, 200, 152, 0.35)"/><circle cx="488" cy="712" r="1.6" fill="rgba(232, 200, 152, 0.35)"/><circle cx="544" cy="264" r="1.9" fill="rgba(232, 200, 152, 0.35)"/><circle cx="600" cy="152" r="3.0" fill="rgba(232, 200, 152, 0.35)"/><circle cx="600" cy="600" r="1.9" fill="rgba(232, 200, 152, 0.35)"/><circle cx="656" cy="264" r="2.7" fill="rgba(232, 200, 152, 0.35)"/><circle cx="656" cy="376" r="1.7" fill="rgba(232, 200, 152, 0.35)"/><circle cx="712" cy="376" r="2.8" fill="rgba(232, 200, 152, 0.35)"/><circle cx="768" cy="96" r="1.8" fill="rgba(232, 200, 152, 0.35)"/><circle cx="824" cy="152" r="1.8" fill="rgba(232, 200, 152, 0.35)"/><circle cx="824" cy="264" r="2.3" fill="rgba(232, 200, 152, 0.35)"/><circle cx="880" cy="264" r="1.5" fill="rgba(232, 200, 152, 0.35)"/><circle cx="880" cy="544" r="1.6" fill="rgba(232, 200, 152, 0.35)"/><circle cx="992" cy="320" r="2.3" fill="rgba(232, 200, 152, 0.35)"/><circle cx="992" cy="376" r="1.5" fill="rgba(232, 200, 152, 0.35)"/><circle cx="992" cy="544" r="2.4" fill="rgba(232, 200, 152, 0.35)"/><circle cx="992" cy="712" r="2.4" fill="rgba(232, 200, 152, 0.35)"/><circle cx="1048" cy="40" r="2.0" fill="rgba(232, 200, 152, 0.35)"/><circle cx="1048" cy="208" r="1.7" fill="rgba(232, 200, 152, 0.35)"/><circle cx="1048" cy="320" r="2.5" fill="rgba(232, 200, 152, 0.35)"/><circle cx="1048" cy="432" r="2.0" fill="rgba(232, 200, 152, 0.35)"/><circle cx="1048" cy="600" r="3.1" fill="rgba(232, 200, 152, 0.35)"/><circle cx="1048" cy="656" r="2.4" fill="rgba(232, 200, 152, 0.35)"/><circle cx="1048" cy="712" r="2.4" fill="rgba(232, 200, 152, 0.35)"/><circle cx="1104" cy="152" r="1.5" fill="rgba(232, 200, 152, 0.35)"/><circle cx="1104" cy="208" r="2.6" fill="rgba(232, 200, 152, 0.35)"/><circle cx="1104" cy="320" r="3.0" fill="rgba(232, 200, 152, 0.35)"/><circle cx="1160" cy="208" r="2.8" fill="rgba(232, 200, 152, 0.35)"/><circle cx="1160" cy="264" r="2.8" fill="rgba(232, 200, 152, 0.35)"/><circle cx="1160" cy="376" r="2.4" fill="rgba(232, 200, 152, 0.35)"/>
+  <circle cx="880" cy="300" r="161" fill="none" stroke="rgba(232, 200, 152, 0.28)" stroke-width="1.5" stroke-dasharray="none"/><circle cx="880" cy="330" r="275" fill="none" stroke="rgba(232, 200, 152, 0.21000000000000002)" stroke-width="2" stroke-dasharray="4 10"/><circle cx="880" cy="360" r="363" fill="none" stroke="rgba(232, 200, 152, 0.14)" stroke-width="2.5" stroke-dasharray="none"/>
+  <circle cx="939" cy="227" r="27" fill="rgba(232, 200, 152, 0.5)"/><circle cx="798" cy="408" r="22" fill="rgba(184, 232, 152, 0.5)"/><circle cx="793" cy="422" r="19" fill="rgba(232, 200, 152, 0.5)"/>
+  <circle cx="880" cy="330" r="86" fill="rgba(232, 200, 152, 0.16)"/>
+  <circle cx="880" cy="330" r="86" fill="none" stroke="rgba(232, 200, 152, 0.55)" stroke-width="2"/>
+  <path d="M880 262 v136 M847 295 h66 M847 365 h66" stroke="url(#accent)" stroke-width="9" stroke-linecap="round"/>
+  <text x="72" y="560" font-family="'Space Grotesk', 'Segoe UI', system-ui, -apple-system, sans-serif" font-size="92" font-weight="700" fill="#F2F4FA" letter-spacing="-2">Pulse</text>
+  <text x="74" y="620" font-family="'Space Grotesk', 'Segoe UI', system-ui, -apple-system, sans-serif" font-size="26" font-weight="500" fill="rgba(167, 173, 194, 0.9)" letter-spacing="6">CASE STUDY — P</text>
+  <rect x="72" y="472" width="64" height="6" rx="3" fill="url(#accent)"/>
+  
+  <rect width="1200" height="750" fill="none" stroke="rgba(255, 255, 255, 0.08)" stroke-width="2"/>
+</svg>

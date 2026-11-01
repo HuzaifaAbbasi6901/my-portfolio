@@ -1,0 +1,440 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Design tokens ────────────────────────────────────────────────────── */
+@layer base {
+  :root {
+    /* Dark theme (default) — deep navy, violet + cyan accents, champagne gold */
+    --rgb-background: 7 8 15;
+    --rgb-surface: 11 13 23;
+    --rgb-card: 255 255 255;
+    --rgb-border: 255 255 255;
+    --rgb-foreground: 242 244 250;
+    --rgb-muted: 167 173 194;
+    --rgb-accent: 139 109 255;
+    --rgb-accent-foreground: 255 255 255;
+    --rgb-cyan: 34 211 238;
+    --rgb-gold: 232 200 152;
+
+    color-scheme: dark;
+  }
+
+  .light {
+    /* Light theme — warm off-white, ink text, softened accents */
+    --rgb-background: 245 246 251;
+    --rgb-surface: 255 255 255;
+    --rgb-card: 255 255 255;
+    --rgb-border: 14 18 32;
+    --rgb-foreground: 14 18 32;
+    --rgb-muted: 74 80 104;
+    --rgb-accent: 109 74 255;
+    --rgb-accent-foreground: 255 255 255;
+    --rgb-cyan: 8 145 178;
+    --rgb-gold: 158 113 36;
+
+    color-scheme: light;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Lenis handles smooth scrolling — keep native anchor jumps instant-correct */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  body {
+    @apply bg-background font-sans text-foreground antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: rgb(var(--rgb-accent) / 0.35);
+    color: rgb(var(--rgb-foreground));
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--rgb-accent));
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgb(var(--rgb-background));
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgb(var(--rgb-accent) / 0.35);
+    border-radius: 8px;
+    border: 2px solid rgb(var(--rgb-background));
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(var(--rgb-accent) / 0.6);
+  }
+
+  /* Hide native cursor when the custom one is active (fine pointers only) */
+  html.has-custom-cursor,
+  html.has-custom-cursor * {
+    cursor: none !important;
+  }
+}
+
+/* ── Utilities ────────────────────────────────────────────────────────── */
+@layer utilities {
+  /* Film grain overlay */
+  .noise-overlay {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 180px 180px;
+  }
+
+  /*
+   * Liquid glass — Apple-style translucent material.
+   * Layers: frosted backdrop blur + saturation, light-edged border,
+   * specular top highlight, and a diagonal sheen (via ::before).
+   */
+  .liquid {
+    position: relative;
+    isolation: isolate;
+    background: linear-gradient(
+      135deg,
+      rgb(var(--rgb-card) / 0.16),
+      rgb(var(--rgb-card) / 0.07)
+    );
+    backdrop-filter: blur(22px) saturate(180%);
+    -webkit-backdrop-filter: blur(22px) saturate(180%);
+    border: 1px solid rgb(var(--rgb-card) / 0.24);
+    box-shadow:
+      inset 0 1px 0 0 rgb(255 255 255 / 0.22),
+      inset 0 -1px 0 0 rgb(255 255 255 / 0.05),
+      0 12px 40px -12px rgb(0 0 0 / 0.45);
+  }
+
+  /* Diagonal refraction sheen + inner glow */
+  .liquid::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: -1;
+    background:
+      linear-gradient(
+        115deg,
+        rgb(255 255 255 / 0.13) 0%,
+        transparent 28%,
+        transparent 72%,
+        rgb(var(--rgb-cyan) / 0.08) 100%
+      );
+    mix-blend-mode: screen;
+  }
+
+  /* Hover state: glass "swells" and catches more light */
+  .liquid-hover {
+    transition:
+      transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 0.45s ease,
+      background-color 0.45s ease;
+  }
+  .liquid-hover:hover {
+    border-color: rgb(var(--rgb-card) / 0.4);
+    box-shadow:
+      inset 0 1px 0 0 rgb(255 255 255 / 0.32),
+      inset 0 -1px 0 0 rgb(255 255 255 / 0.08),
+      0 20px 60px -16px rgb(0 0 0 / 0.55),
+      0 0 32px -8px rgb(var(--rgb-accent) / 0.35);
+  }
+
+  .light .liquid {
+    background: linear-gradient(
+      135deg,
+      rgb(255 255 255 / 0.6),
+      rgb(255 255 255 / 0.28)
+    );
+    border-color: rgb(255 255 255 / 0.75);
+    box-shadow:
+      inset 0 1px 0 0 rgb(255 255 255 / 0.9),
+      inset 0 -1px 0 0 rgb(255 255 255 / 0.4),
+      0 12px 40px -14px rgb(14 18 32 / 0.18);
+  }
+  .light .liquid::before {
+    background: linear-gradient(
+      115deg,
+      rgb(255 255 255 / 0.65) 0%,
+      transparent 30%,
+      transparent 72%,
+      rgb(var(--rgb-cyan) / 0.06) 100%
+    );
+    mix-blend-mode: normal;
+  }
+  .light .liquid-hover:hover {
+    border-color: rgb(255 255 255 / 0.95);
+    box-shadow:
+      inset 0 1px 0 0 rgb(255 255 255 / 1),
+      0 20px 60px -18px rgb(14 18 32 / 0.25),
+      0 0 32px -8px rgb(var(--rgb-accent) / 0.22);
+  }
+
+  /* Vivid drifting backdrop — gives the glass something to refract */
+  .bg-mesh {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    background: radial-gradient(
+        120% 90% at 50% 0%,
+        rgb(var(--rgb-surface)) 0%,
+        rgb(var(--rgb-background)) 60%
+      ),
+      rgb(var(--rgb-background));
+  }
+  .bg-mesh::before,
+  .bg-mesh::after {
+    content: "";
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(110px);
+    will-change: transform;
+  }
+  .bg-mesh::before {
+    inset: -20% -10% auto auto;
+    width: 60vw;
+    height: 60vw;
+    max-width: 880px;
+    max-height: 880px;
+    background: conic-gradient(
+      from 120deg at 50% 50%,
+      rgb(var(--rgb-accent) / 0.3),
+      rgb(var(--rgb-cyan) / 0.2),
+      rgb(var(--rgb-gold) / 0.14),
+      rgb(var(--rgb-accent) / 0.3)
+    );
+    animation: mesh-drift 26s ease-in-out infinite alternate;
+  }
+  .bg-mesh::after {
+    inset: auto auto -25% -15%;
+    width: 55vw;
+    height: 55vw;
+    max-width: 780px;
+    max-height: 780px;
+    background: conic-gradient(
+      from 300deg at 50% 50%,
+      rgb(var(--rgb-cyan) / 0.24),
+      rgb(var(--rgb-accent) / 0.22),
+      rgb(var(--rgb-cyan) / 0.24)
+    );
+    animation: mesh-drift 32s ease-in-out infinite alternate-reverse;
+  }
+  .light .bg-mesh::before {
+    opacity: 0.55;
+  }
+  .light .bg-mesh::after {
+    opacity: 0.5;
+  }
+
+  @keyframes mesh-drift {
+    0% {
+      transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+    }
+    100% {
+      transform: translate3d(-6vw, 8vh, 0) rotate(28deg) scale(1.15);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bg-mesh::before,
+    .bg-mesh::after {
+      animation: none;
+    }
+  }
+
+  .glass {
+    background: rgb(var(--rgb-card) / 0.05);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgb(var(--rgb-border) / 0.1);
+  }
+
+  .text-gradient {
+    background: linear-gradient(
+      100deg,
+      rgb(var(--rgb-accent)),
+      rgb(var(--rgb-cyan))
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Gradient border card (animated angle when supported) */
+  .gradient-border {
+    position: relative;
+    border: 1px solid transparent;
+    background:
+      linear-gradient(rgb(var(--rgb-surface)), rgb(var(--rgb-surface))) padding-box,
+      linear-gradient(
+          135deg,
+          rgb(var(--rgb-accent) / 0.6),
+          rgb(var(--rgb-cyan) / 0.25),
+          rgb(var(--rgb-accent) / 0.6)
+        )
+        border-box;
+  }
+
+  .skeleton {
+    @apply animate-shimmer rounded-2xl bg-border/10;
+    background-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgb(var(--rgb-card) / 0.06) 50%,
+      transparent 100%
+    );
+    background-size: 400px 100%;
+    background-repeat: no-repeat;
+  }
+
+  /* Custom cursor ring states */
+  .cursor-ring {
+    scale: var(--cursor-scale, 1);
+    transition: scale 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+      background-color 0.25s ease;
+  }
+  .cursor-ring.cursor-ring-active {
+    background-color: rgb(255 255 255 / 0.08);
+  }
+  .cursor-ring[data-pressed="true"] {
+    scale: calc(var(--cursor-scale, 1) * 0.82);
+  }
+
+  .skip-link {
+    position: fixed;
+    top: -100%;
+    left: 1rem;
+    z-index: 110;
+    border-radius: 9999px;
+    background: rgb(var(--rgb-accent));
+    padding: 0.6rem 1.2rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: white;
+    transition: top 0.3s ease;
+  }
+  .skip-link:focus {
+    top: 1rem;
+  }
+}
+
+/* ── Code blocks (rehype-highlight output) ────────────────────────────── */
+.hljs {
+  color: rgb(var(--rgb-foreground) / 0.9);
+  background: transparent;
+}
+.hljs-comment,
+.hljs-quote {
+  color: rgb(var(--rgb-muted));
+  font-style: italic;
+}
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-built_in {
+  color: #8b6dff;
+}
+.hljs-string,
+.hljs-regexp,
+.hljs-addition {
+  color: #4ade80;
+}
+.hljs-number,
+.hljs-literal,
+.hljs-attr,
+.hljs-attribute {
+  color: #22d3ee;
+}
+.hljs-title,
+.hljs-title.function_,
+.hljs-section,
+.hljs-name {
+  color: #e8c898;
+}
+.hljs-type,
+.hljs-class .hljs-title {
+  color: #f472b6;
+}
+.hljs-variable,
+.hljs-template-variable,
+.hljs-subst {
+  color: rgb(var(--rgb-foreground));
+}
+.hljs-deletion {
+  color: #fb7185;
+}
+.hljs-meta {
+  color: #94a3b8;
+}
+.hljs-emphasis {
+  font-style: italic;
+}
+.hljs-strong {
+  font-weight: 700;
+}
+
+.light .hljs-keyword,
+.light .hljs-selector-tag,
+.light .hljs-built_in {
+  color: #6d28d9;
+}
+.light .hljs-string,
+.light .hljs-regexp,
+.light .hljs-addition {
+  color: #15803d;
+}
+.light .hljs-number,
+.light .hljs-literal,
+.light .hljs-attr,
+.light .hljs-attribute {
+  color: #0e7490;
+}
+.light .hljs-title,
+.light .hljs-title.function_,
+.light .hljs-section,
+.light .hljs-name {
+  color: #92700c;
+}
+.light .hljs-type,
+.light .hljs-class .hljs-title {
+  color: #be185d;
+}
+
+/* Code block container inside prose */
+.prose pre {
+  @apply overflow-x-auto rounded-2xl border border-border/10 bg-surface/80 p-5 text-[13px] leading-relaxed;
+}
+.prose pre code {
+  @apply bg-transparent p-0;
+  border: none;
+}
+
+/* ── Reduced motion ───────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

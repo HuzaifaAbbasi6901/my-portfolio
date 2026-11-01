@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="760" viewBox="0 0 640 760">
+  <defs>
+    <linearGradient id="pbg" x1="0" y1="0" x2="640" y2="760" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0C0E1A"/>
+      <stop offset="100%" stop-color="#131628"/>
+    </linearGradient>
+    <linearGradient id="phead" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8B6DFF"/>
+      <stop offset="100%" stop-color="#22D3EE"/>
+    </linearGradient>
+    <clipPath id="pclip"><rect width="640" height="760" rx="28"/></clipPath>
+  </defs>
+  <g clip-path="url(#pclip)">
+    <rect width="640" height="760" fill="url(#pbg)"/>
+    <circle cx="320" cy="330" r="130" fill="none" stroke="rgba(139, 109, 255, 0.22)" stroke-width="1.6" stroke-dasharray="none"/><circle cx="320" cy="330" r="192" fill="none" stroke="rgba(34, 211, 238, 0.18)" stroke-width="1.6" stroke-dasharray="5 12"/><circle cx="320" cy="330" r="254" fill="none" stroke="rgba(139, 109, 255, 0.14)" stroke-width="1.6" stroke-dasharray="none"/><circle cx="320" cy="330" r="316" fill="none" stroke="rgba(34, 211, 238, 0.1)" stroke-width="1.6" stroke-dasharray="5 12"/>
+    <circle cx="385" cy="341" r="3.0" fill="rgba(139, 109, 255, 0.5)"/><circle cx="112" cy="400" r="1.7" fill="rgba(139, 109, 255, 0.5)"/><circle cx="554" cy="359" r="1.6" fill="rgba(139, 109, 255, 0.5)"/><circle cx="477" cy="233" r="1.5" fill="rgba(139, 109, 255, 0.5)"/><circle cx="439" cy="464" r="1.0" fill="rgba(34, 211, 238, 0.5)"/><circle cx="536" cy="39" r="2.4" fill="rgba(34, 211, 238, 0.5)"/><circle cx="171" cy="47" r="1.4" fill="rgba(139, 109, 255, 0.5)"/><circle cx="339" cy="21" r="1.4" fill="rgba(139, 109, 255, 0.5)"/><circle cx="312" cy="615" r="1.8" fill="rgba(34, 211, 238, 0.5)"/><circle cx="24" cy="39" r="2.3" fill="rgba(139, 109, 255, 0.5)"/><circle cx="157" cy="491" r="1.5" fill="rgba(34, 211, 238, 0.5)"/><circle cx="473" cy="653" r="2.2" fill="rgba(34, 211, 238, 0.5)"/><circle cx="182" cy="223" r="1.2" fill="rgba(139, 109, 255, 0.5)"/><circle cx="436" cy="527" r="3.2" fill="rgba(34, 211, 238, 0.5)"/><circle cx="604" cy="328" r="3.3" fill="rgba(34, 211, 238, 0.5)"/><circle cx="71" cy="12" r="1.9" fill="rgba(34, 211, 238, 0.5)"/><circle cx="392" cy="684" r="1.2" fill="rgba(139, 109, 255, 0.5)"/><circle cx="598" cy="211" r="2.7" fill="rgba(34, 211, 238, 0.5)"/><circle cx="333" cy="625" r="1.3" fill="rgba(139, 109, 255, 0.5)"/><circle cx="360" cy="696" r="2.0" fill="rgba(139, 109, 255, 0.5)"/><circle cx="216" cy="453" r="1.8" fill="rgba(139, 109, 255, 0.5)"/><circle cx="189" cy="342" r="3.0" fill="rgba(139, 109, 255, 0.5)"/><circle cx="636" cy="677" r="2.0" fill="rgba(139, 109, 255, 0.5)"/><circle cx="189" cy="77" r="2.7" fill="rgba(34, 211, 238, 0.5)"/><circle cx="503" cy="688" r="1.2" fill="rgba(34, 211, 238, 0.5)"/><circle cx="526" cy="99" r="3.3" fill="rgba(34, 211, 238, 0.5)"/>
+    <!-- abstract figure -->
+    <circle cx="320" cy="330" r="118" fill="url(#phead)"/>
+    <circle cx="320" cy="330" r="118" fill="none" stroke="rgba(255, 255, 255, 0.25)" stroke-width="2"/>
+    <path d="M150 690 C 170 540, 260 500, 320 500 C 380 500, 470 540, 490 690 Z" fill="rgba(139, 109, 255, 0.3)"/>
+    <path d="M150 690 C 170 540, 260 500, 320 500 C 380 500, 470 540, 490 690 Z" fill="none" stroke="rgba(34, 211, 238, 0.5)" stroke-width="2"/>
+    <path d="M282 312 v44 M358 312 v44 M282 334 h76" stroke="#FFFFFF" stroke-width="9" stroke-linecap="round"/>
+    <rect x="28" y="28" width="584" height="704" rx="22" fill="none" stroke="rgba(255, 255, 255, 0.1)" stroke-width="1.5"/>
+    <text x="320" y="732" text-anchor="middle" font-family="'Space Grotesk', 'Segoe UI', system-ui, -apple-system, sans-serif" font-size="22" font-weight="600" fill="rgba(167, 173, 194, 0.9)" letter-spacing="10">CREATIVE DEVELOPER</text>
+  </g>
+</svg>
